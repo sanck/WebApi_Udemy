@@ -9,6 +9,12 @@ namespace WebApiAutores
         {
         }
 
+        //Es para poder hacer querys especificos
         public DbSet<Autor> Autores { get; set; }
+        public DbSet<Libro> Libros { get; set; }
+        //Tools - Package Manager Console
+        //Commands: 
+            //Add-Migration Libros
+            //Update-Database
     }
 }
