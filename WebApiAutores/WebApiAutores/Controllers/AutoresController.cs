@@ -24,15 +24,32 @@ namespace WebApiAutores.Controllers
         //    };
         //}
 
+        //OBTIENE LISTA
         [HttpGet]
         public async Task<ActionResult<List<Autor>>> Get()
         {
             return await context.Autores.ToListAsync();
         }
+
+        //INSERT
         [HttpPost]
         public async Task<ActionResult> Post(Autor autor)
         {
             context.Add(autor);
+            await context.SaveChangesAsync();
+            return Ok();
+        }
+
+        //ACTUALIZAR
+        [HttpPut("{id:int}")] // api/autores/[1-9]
+        public async Task<ActionResult> Put(Autor autor, int id)
+        {
+            if(autor.Id != id)
+            {
+                return BadRequest("El id del autor no coincide con el id de la URL");
+            }
+
+            context.Update(autor);
             await context.SaveChangesAsync();
             return Ok();
         }
