@@ -49,8 +49,32 @@ namespace WebApiAutores.Controllers
                 return BadRequest("El id del autor no coincide con el id de la URL");
             }
 
+            var existe = await context.Autores.AnyAsync(x => x.Id == id);
+
+            if (!existe)
+            {
+                return NotFound();
+            }
+
             context.Update(autor);
             await context.SaveChangesAsync();
+            return Ok();
+        }
+
+        //DELETE
+        [HttpDelete("{id:int}")] // api/autores/2
+        public async Task<ActionResult> Delete(int id)
+        {
+            var existe = await context.Autores.AnyAsync(x => x.Id == id);
+
+            if (!existe)
+            {
+                return NotFound();
+            }
+
+            context.Remove(new Autor() { Id = id });
+            await context.SaveChangesAsync();
+
             return Ok();
         }
     }
