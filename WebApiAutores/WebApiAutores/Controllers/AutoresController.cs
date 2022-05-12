@@ -29,7 +29,7 @@ namespace WebApiAutores.Controllers
             return await context.Autores.Include(x => x.Libros).FirstOrDefaultAsync();
         }
 
-        [HttpGet("{id:int}/{param2?=persona}")]
+        [HttpGet("{id:int}/{param2=persona}")] // param2? -> Opcional
         public async Task<ActionResult<Autor>> Get(int id, string param2)
         {
             var autor = await context.Autores.Include(x => x.Libros).FirstOrDefaultAsync(x => x.Id == id);
