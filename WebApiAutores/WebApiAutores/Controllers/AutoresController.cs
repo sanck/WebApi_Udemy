@@ -14,21 +14,11 @@ namespace WebApiAutores.Controllers
             this.context = context;
         }
 
-        //[HttpGet]
-        //public async ActionResult<List<Autor>> Get()
-        //{
-        //    return new List<Autor>()
-        //    {
-        //        new Autor(){ Id = 1, Nombre = "Daniel"},
-        //        new Autor(){ Id = 2, Nombre = "Armando"}
-        //    };
-        //}
-
         //OBTIENE LISTA
         [HttpGet]
         public async Task<ActionResult<List<Autor>>> Get()
         {
-            return await context.Autores.ToListAsync();
+            return await context.Autores.Include(x => x.Libros).ToListAsync();
         }
 
         //INSERT
@@ -41,7 +31,7 @@ namespace WebApiAutores.Controllers
         }
 
         //ACTUALIZAR
-        [HttpPut("{id:int}")] // api/autores/[1-9]
+        [HttpPut("{id:int}")] // api/autores/[1-n]
         public async Task<ActionResult> Put(Autor autor, int id)
         {
             if(autor.Id != id)
