@@ -5,7 +5,7 @@ using WebApiAutores.Entidades;
 namespace WebApiAutores.Controllers
 {
     [ApiController]//Decorando para hacer validaciones automaticas respecto a la data recibida en nuestro controlador
-    [Route("api/autores")]
+    [Route("api/autores")] // api/Autores = api/[controller]
     public class AutoresController: ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -15,7 +15,9 @@ namespace WebApiAutores.Controllers
         }
 
         //OBTIENE LISTA
-        [HttpGet]
+        [HttpGet] // api/autores
+        [HttpGet("listado")] // api/autores/listado
+        [HttpGet("/listado")] // listado
         public async Task<ActionResult<List<Autor>>> Get()
         {
             return await context.Autores.Include(x => x.Libros).ToListAsync();
