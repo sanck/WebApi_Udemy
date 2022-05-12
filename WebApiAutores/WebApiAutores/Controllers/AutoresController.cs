@@ -13,7 +13,7 @@ namespace WebApiAutores.Controllers
         {
             this.context = context;
         }
-
+        //
         //OBTIENE LISTA
         [HttpGet] // api/autores
         [HttpGet("listado")] // api/autores/listado
