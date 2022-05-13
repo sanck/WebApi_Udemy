@@ -23,8 +23,8 @@ namespace WebApiAutores.Controllers
             return await context.Autores.Include(x => x.Libros).ToListAsync();
         }
 
-        [HttpGet("primero")] // api/autores/primero
-        public async Task<ActionResult<Autor>> PrimerAutor()
+        [HttpGet("primero")] // api/autores/primero?nombre=felipe&apellido=gavilan
+        public async Task<ActionResult<Autor>> PrimerAutor([FromHeader] int miValor, [FromQuery] string nombre) // miValor Viene desde la cabecera, 
         {
             return await context.Autores.Include(x => x.Libros).FirstOrDefaultAsync();
         }
@@ -43,7 +43,7 @@ namespace WebApiAutores.Controllers
         }
 
         [HttpGet("{nombre}")]
-        public async Task<ActionResult<Autor>> Get(string nombre)
+        public async Task<ActionResult<Autor>> Get([FromRoute] string nombre) // Con FromRoute podemos decir que el parametro viene desde la ruta (URL)
         {
             var autor = await context.Autores.Include(x => x.Libros).FirstOrDefaultAsync(x => x.Nombre.Contains(nombre));
 
@@ -57,7 +57,7 @@ namespace WebApiAutores.Controllers
 
         //INSERT
         [HttpPost]
-        public async Task<ActionResult> Post(Autor autor)
+        public async Task<ActionResult> Post([FromBody] Autor autor) //El autor va a venir desde el cuerpo de la peticion http
         {
             context.Add(autor);
             await context.SaveChangesAsync();
