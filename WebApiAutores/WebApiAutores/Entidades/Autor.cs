@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApiAutores.Validaciones;
 
 namespace WebApiAutores.Entidades
 {
@@ -8,6 +9,7 @@ namespace WebApiAutores.Entidades
         public int Id { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 4, ErrorMessage = "El campo {0} no debe de tener más de {1} carácteres")]
+        [PrimeraLetraMayuscula]// Primera letra de un string que sea mayuscula
         public string Nombre { get; set; }
         [Range(18, 120)]
         [NotMapped]
