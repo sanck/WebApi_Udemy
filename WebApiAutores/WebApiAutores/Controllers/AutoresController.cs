@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApiAutores.Entidades;
+using WebApiAutores.Servicios;
 
 namespace WebApiAutores.Controllers
 {
@@ -9,9 +10,15 @@ namespace WebApiAutores.Controllers
     public class AutoresController: ControllerBase
     {
         private readonly ApplicationDbContext context;
-        public AutoresController(ApplicationDbContext context)
+        private readonly IServicio servicio;
+
+        //Acoplamiento alto descomentar las sig linea
+        //public AutoresController()
+        public AutoresController(ApplicationDbContext context, IServicio servicio)
         {
+            //Acoplamiento alto comentar la sig linea
             this.context = context;
+            this.servicio = servicio;
         }
         //
         //OBTIENE LISTA
@@ -20,6 +27,9 @@ namespace WebApiAutores.Controllers
         [HttpGet("/listado")] // listado
         public async Task<ActionResult<List<Autor>>> Get()
         {
+            //Acoplamiento alto descomentar linea
+            //var context = new ApplicationDbContext(null);
+            servicio.RealizarTarea();
             return await context.Autores.Include(x => x.Libros).ToListAsync();
         }
 
