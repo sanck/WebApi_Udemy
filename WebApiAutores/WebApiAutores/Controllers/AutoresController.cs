@@ -4,7 +4,7 @@ using WebApiAutores.Entidades;
 
 namespace WebApiAutores.Controllers
 {
-    [ApiController]//Decorando para hacer validaciones automaticas respecto a la data recibida en nuestro controlador
+    [ApiController]//Decorando para hacer validaciones automaticas respecto a la data recibida en nuestro controlador - permite retornar un error 400 bad request a nivel de modelo
     [Route("api/autores")] // api/Autores = api/[controller]
     public class AutoresController: ControllerBase
     {
