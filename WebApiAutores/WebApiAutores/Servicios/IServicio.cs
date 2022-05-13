@@ -16,14 +16,14 @@
 
         public void RealizarTarea()
         {
-            throw new NotImplementedException();
+            
         }
     }
     public class ServicioB : IServicio
     {
         public void RealizarTarea()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

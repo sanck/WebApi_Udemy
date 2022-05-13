@@ -9,11 +9,7 @@ namespace WebApiAutores
     {
         public Startup(IConfiguration configuration )
         {
-            var autoresController = new AutoresController(
-                new ApplicationDbContext(null), 
-                new ServicioA(new Logger())
-                );
-            autoresController.Get();
+            
 
             Configuration = configuration;
         }
@@ -22,11 +18,18 @@ namespace WebApiAutores
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+
             services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            services.AddTransient<IServicio, ServicioA>();
+
+
+            
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
         }
